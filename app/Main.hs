@@ -37,7 +37,7 @@ app = (component 0 updateModel viewModel)
   { styles = [ Sheet sheet ]
   }
 -----------------------------------------------------------------------------
-updateModel :: Action -> Effect parent Int Action
+updateModel :: Action -> Effect parent props Int Action
 updateModel = \case
   AddOne ->
     this += 1
@@ -46,8 +46,8 @@ updateModel = \case
   SayHelloWorld ->
     io_ (consoleLog "Hello World!")
 -----------------------------------------------------------------------------
-viewModel :: Int -> View Int Action
-viewModel x = H.div_
+viewModel :: props -> Int -> View Int Action
+viewModel _ x = H.div_
   [ P.class_ "counter-container" ]
   [ H.h1_
     [ P.class_ "counter-title"
