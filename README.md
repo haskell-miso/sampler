@@ -1,7 +1,7 @@
-🍱 miso-sampler 
+🍱 miso-sampler
 ====================
 
-This project contains a sample [miso](https://github.com/dmjio/miso) application with scripts to 
+This project contains a sample [miso](https://github.com/dmjio/miso) application with scripts to
 develop against vanilla GHC and to compile to Web Assembly or JavaScript.
 
 ### Source
@@ -11,14 +11,14 @@ View [source](https://github.com/haskell-miso/miso-sampler/blob/main/app/Main.hs
 ### Install Nix (w/ flakes enabled)
 
 ```bash
-# Install nix 
+# Install nix
 curl -L https://nixos.org/nix/install | sh
 
 # Enable flakes
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
 
-> [!TIP] 
+> [!TIP]
 > Miso requires installing [nix](https://nixos.org) with [Nix Flakes](https://wiki.nixos.org/wiki/Flakes) enabled.
 
 ### Browser mode 🔥
@@ -31,8 +31,8 @@ $ nix develop .#wasm --command bash -c 'make repl'
 
 ```
 Preprocessing executable 'app' for app-0.1.0.0...
-GHCi, version 9.12.2.20250924: https://www.haskell.org/ghc/  :? for help
-Open http://127.0.0.1:8080/main.html or import http://127.0.0.1:8080/main.js to boot ghci
+GHCi, version 9.14.1.20260330: https://www.haskell.org/ghc/  :? for help
+Open http://127.0.0.1:8080/main.html or import("http://127.0.0.1:8080/main.js") to boot ghci
 ```
 
 Paste the URL in your browser. Doing so will cause assets to transfer; you can inspect the network tab, but do not refresh the page. The REPL will load in the terminal
@@ -80,7 +80,7 @@ $ nix develop .#wasm --command bash -c 'make watch'
 
 ### Development
 
-Call `nix develop` to enter a shell with [GHC 9.12.2](https://haskell.org/ghc)
+Call `nix develop` to enter a shell with [GHC 9.14.1](https://haskell.org/ghc)
 
 ```bash
 $ nix develop .#wasm
@@ -120,7 +120,7 @@ Ensure that the Haskell miso [cachix](cachix.org) is being used when building yo
 
 ```yaml
 - name: Install cachix
-  uses: cachix/cachix-action@v16
+  uses: cachix/cachix-action@v17
   with:
     name: haskell-miso-cachix
 ```

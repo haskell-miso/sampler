@@ -2,7 +2,7 @@ name: Build and deploy
 
 on:
   push:
-    branches: main
+    branches: [ main ]
   pull_request:
 
 permissions:
@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install cachix
-        uses: cachix/cachix-action@v16
+        uses: cachix/cachix-action@v17
         with:
           name: haskell-miso-cachix
 
@@ -36,7 +36,7 @@ jobs:
         run: nix develop .#ghcjs --command bash -c "make js"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
@@ -47,7 +47,7 @@ jobs:
 
       - name: Build WASM using GHCup
         run: |
-          make ghcup-build          
+          make ghcup-build
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -62,5 +62,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-
+        uses: actions/deploy-pages@v5
