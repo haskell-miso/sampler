@@ -105,7 +105,7 @@ $ nix develop .#ghcjs --command bash -c "make js"
 To host the built application you can call `serve`
 
 ```bash
-$ nix develop --command bash -c "make serve"
+$ nix develop .#wasm --command bash -c "make serve"
 ```
 
 ### Clean
