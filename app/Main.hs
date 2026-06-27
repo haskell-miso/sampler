@@ -156,7 +156,7 @@ sheet =
   , CSS.selector_ ".counter-display.animate"
     [ CSS.animation "pulse 0.3s ease"
     ]
-  , CSS.media_ "(max-width: 480px)"
+  , CSS.media_ (CSS.maxWidth_ "480px")
     [ CSS.rule_ ".counter-container"
       [ CSS.padding (CSS.rem 1.5)
       ]
