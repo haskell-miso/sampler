@@ -8,6 +8,8 @@ all: update build optim
 
 js: update-js build-js
 
+mhs: build-mhs
+
 update:
 	wasm32-wasi-cabal update
 
@@ -33,7 +35,7 @@ serve:
 	http-server public
 
 clean:
-	rm -rf dist-newstyle public
+	rm -rf dist-newstyle dist-mcabal public
 
 update-js:
 	cabal update --with-ghc=javascript-unknown-ghcjs-ghc --with-hc-pkg=javascript-unknown-ghcjs-ghc-pkg
@@ -44,6 +46,12 @@ build-js:
 	rm -rf public
 	cp -rv static public
 	bunx --bun swc ./all.js -o public/index.js
+
+build-mhs:
+	mcabal --options=-tbrowser build
+	rm -rf public
+	cp -rv static public
+	cp -v ./dist-mcabal/bin/mhs/app public/index.js
 
 ghcup-update:
 	cabal update $(CABAL_ARGS)

@@ -100,6 +100,12 @@ $ nix develop .#wasm --command bash -c "make"
 $ nix develop .#ghcjs --command bash -c "make js"
 ```
 
+### Build (MicroHs)
+
+```bash
+$ nix develop .#mhs --command bash -c "make mhs"
+```
+
 ### Serve
 
 To host the built application you can call `serve`

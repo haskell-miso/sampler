@@ -2,3 +2,5 @@
 dist*
 result
 public
+.mcabal
+.emcache
