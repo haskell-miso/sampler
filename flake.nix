@@ -10,6 +10,7 @@
       devShells.hls = inputs.miso.outputs.devShells.${system}.hls;
       devShells.wasm = inputs.miso.outputs.devShells.${system}.wasm;
       devShells.ghcjs = inputs.miso.outputs.devShells.${system}.ghcjs;
+      devShells.mhs = inputs.miso.outputs.devShells.${system}.mhs;
     });
 
 }
