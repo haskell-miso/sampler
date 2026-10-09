@@ -52,6 +52,38 @@ jobs:
       #   run: |
       #     make ghcup-build
 
+  # The same builds on macOS (Apple Silicon) and Linux on ARM.  These do not
+  # deploy, so a failure here does not hold back the site.  (Intel macOS is
+  # left out: nixpkgs has dropped x86_64-darwin.)
+  build-other:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest, ubuntu-24.04-arm ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 240
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install cachix
+        uses: cachix/cachix-action@v17
+        with:
+          name: haskell-miso-cachix
+
+      - name: Build WASM using Nix
+        run: nix develop .#wasm --command bash -c "make"
+
+      - name: Build MicroHs using Nix
+        run: nix develop .#mhs --command bash -c "make mhs"
+
+      - name: Build JS using Nix
+        run: nix develop .#ghcjs --command bash -c "make js"
+
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
