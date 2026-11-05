@@ -11,6 +11,21 @@ permissions:
   id-token: write
 
 jobs:
+  miso:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: haskell-miso/setup-miso@v1
+        with:
+          version: v0.1.0
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
   build:
     runs-on: ubuntu-latest
 
@@ -36,12 +51,7 @@ jobs:
         run: nix develop .#mhs --command bash -c "make mhs"
 
       - name: Build JS using Nix
-        run: nix develop .#ghcjs --command bash -c "make js"
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: ./public
+        run: nix develop .#ghcjs --command bash -c "make js
 
       # - name: Install GHCup
       #   uses: haskell/ghcup-setup@v1
@@ -60,7 +70,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    needs: build
+    needs: miso
 
     steps:
       - name: Deploy to GitHub Pages
