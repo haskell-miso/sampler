@@ -1,0 +1,12 @@
+# The sampler as a project of the miso tool (MicroHs, no GHC): miso dev to
+# develop, miso build to build public/ (this is what CI deploys).  app.cabal
+# and the Makefile build it with GHC instead.
+name: miso-sampler
+version: 0.1.0
+main: Main
+source-dirs: [app]
+# browser: WebAssembly (needs emcc)
+target: browser
+# its own index.html: the one in static/ loads the GHC build's index.js
+static-dir: miso-static
+dependencies: [miso]
