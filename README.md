@@ -106,6 +106,16 @@ $ nix develop .#ghcjs --command bash -c "make js"
 $ nix develop .#mhs --command bash -c "make mhs"
 ```
 
+### The miso tool (MicroHs, without nix)
+
+The sampler is also a project of the [miso tool](https://haskell-miso.org/docs/cli) (`miso.yml`), which builds it with MicroHs, without GHC or nix ([emscripten](https://emscripten.org) is needed for the browser):
+
+```bash
+$ curl -fsSL https://haskell-miso.org/download | sh
+$ miso dev      # build, serve on http://localhost:8000, rebuild and reload on save
+$ miso build    # public/
+```
+
 ### Serve
 
 To host the built application you can call `serve`
@@ -131,6 +141,12 @@ Ensure that the Haskell miso [cachix](https://haskell-miso-cachix.cachix.org) is
     name: haskell-miso-cachix
 ```
 
+In CI, the [setup-miso](https://github.com/haskell-miso/setup-miso) action installs the miso tool and runs `miso build` (with emscripten):
+
+```yaml
+- uses: haskell-miso/setup-miso@v1
+```
+
 ### Hosting
 
-To upload and host your project to Github Pages, please see [our Github workflow file](https://github.com/haskell-miso/miso-sampler/blob/main/.github/workflows/main.yml#L38-L56) and the necessary Github actions included.
+The site is built with the miso tool and deployed to GitHub Pages: see the `miso` and `deploy` jobs of [our Github workflow file](https://github.com/haskell-miso/miso-sampler/blob/main/.github/workflows/main.yml).

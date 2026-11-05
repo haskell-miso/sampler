@@ -4,3 +4,6 @@ result
 public
 .mcabal
 .emcache
+.miso/
+.mhscache
+.miso-build.log
