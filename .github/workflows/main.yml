@@ -51,7 +51,7 @@ jobs:
         run: nix develop .#mhs --command bash -c "make mhs"
 
       - name: Build JS using Nix
-        run: nix develop .#ghcjs --command bash -c "make js
+        run: nix develop .#ghcjs --command bash -c "make js"
 
       # - name: Install GHCup
       #   uses: haskell/ghcup-setup@v1
